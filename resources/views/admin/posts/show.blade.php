@@ -8,6 +8,10 @@
         <span>{{$post->posts_title}}</span>
     </div><br>
     <div>
+        <h4>Categoria:</h6>
+        <span>{{$post->category ? $post->category->name : "-"}}</span>
+    </div><br>
+    <div>
         <h4>Contenuto Post:</h6>
         <span>{{$post->content}}</span>
     </div><br><br>

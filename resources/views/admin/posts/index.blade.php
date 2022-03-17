@@ -21,7 +21,7 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Title</th>
-            <th scope="col">Slug</th>
+            <th scope="col">Category</th>
             <th scope="col">Content</th>
             <th scope="col"></th>
           </tr>
@@ -31,7 +31,7 @@
             <tr>
                 <th scope="row">{{$element->id}}</th>
                 <td>{{$element->posts_title}}</td>
-                <td>{{$element->slug}}</td>
+                <td>{{$element->category ? $element->category->name : "-"}}</td>
                 <td>{{$element->content}}</td>
                 <td><a href="{{route('admin.posts.show',$element->id)}}"><button type="button" class="btn btn-primary">Show</button></a></td>
             </tr>

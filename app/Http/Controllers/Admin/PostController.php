@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Post;
+use App\Category;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -16,8 +17,9 @@ class PostController extends Controller
      */
     public function index()
     {
+        $data_categories = Category::all();
         $data_posts = Post::all();
-        return view('admin.posts.index', compact('data_posts'));
+        return view('admin.posts.index', compact('data_posts','data_categories'));
     }
 
     /**
@@ -27,7 +29,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $data_categories = Category::all();
+        return view('admin.posts.create',compact('data_categories'));
     }
 
     /**
@@ -41,6 +44,7 @@ class PostController extends Controller
         $request->validate([
             "posts_title" => 'required|min:1|max:50',
             "content" => 'required',
+            "category_id"=>'nullable|exists:categories,id'
         ]);
 
 
@@ -54,6 +58,7 @@ class PostController extends Controller
         }
 
         $data['slug'] = $tempSlug;
+       
 
         $newPost = new Post();
         $newPost->fill($data);
@@ -82,7 +87,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', compact('post'));
+        $data_categories = Category::all();
+        return view('admin.posts.edit', compact('post','data_categories'));
     }
 
     /**
@@ -97,6 +103,7 @@ class PostController extends Controller
         $request->validate([
             "posts_title" => 'required|min:1|max:50',
             "content" => 'required',
+            "category_id"=>'nullable|exists:categories,id'
         ]);
 
 

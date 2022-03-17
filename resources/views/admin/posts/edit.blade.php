@@ -13,6 +13,18 @@
           <label for="content">Content:</label>
           <textarea class="form-control" id="content" rows="3" name="content" >{{$post->content}}</textarea>
         </div>
+        <div>
+          <select name="category_id" class="form-select form-select-lg mb-3"  aria-label="Default select example">
+            <option>Select a category:</option>
+            @foreach ($data_categories as $value)
+              <option value="{{$value->id}}"
+                {{$value->id == old('category_id',$post->category_id) ? "selected" : ""}}
+                >
+                  {{$value->name}}
+              </option>
+            @endforeach
+          </select>
+        </div>
         <input type="submit" class="btn btn-primary" value="Edit">
       </form>
 </div>
